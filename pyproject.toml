@@ -1,0 +1,98 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "detbench"
+version = "0.1.0"
+description = "Benchmarking toolkit for object detection — reproducible multi-dataset, multi-model, multi-regime training sweeps with noise-robust loss functions and automated error analysis."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [
+    { name = "Alan Peng" },
+]
+keywords = [
+    "object-detection",
+    "benchmarking",
+    "model-comparison",
+    "noise-robust-loss",
+    "training-sweep",
+    "error-analysis",
+    "detection-evaluation",
+    "computer-vision",
+    "deep-learning",
+    "data-centric-ai",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Image Recognition",
+    "Typing :: Typed",
+]
+
+dependencies = [
+    "torch>=2.0",
+    "torchvision>=0.15",
+    "Pillow>=9.0",
+    "numpy>=1.24",
+    "opencv-python>=4.8",
+    "pandas>=2.0",
+    "pyyaml>=6.0",
+    "tqdm>=4.60",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "mypy>=1.0",
+    "ruff>=0.1",
+    "pre-commit>=3.0",
+]
+yolo = [
+    "ultralytics>=8.0",
+]
+
+[project.scripts]
+detbench = "detbench.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/PhotonFlow/detbench"
+Repository = "https://github.com/PhotonFlow/detbench"
+Issues = "https://github.com/PhotonFlow/detbench/issues"
+Documentation = "https://github.com/PhotonFlow/detbench#readme"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/detbench"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 88
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "B",    # flake8-bugbear
+    "UP",   # pyupgrade
+]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
